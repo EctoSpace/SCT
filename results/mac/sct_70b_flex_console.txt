@@ -1,0 +1,30 @@
+python3 sct_70b_flex.py
+
+=======================================================
+  SPECTRAL COMPACT TRAINING  70B ARCHITECTURE TEST
+=======================================================
+  Device: mps
+
+  [Architecture]
+  Layers: 80 | Hidden: 8192 | FFN: 28672
+  Rank: 32
+  Dense Equivalent:   77.85 B parameters
+  SCT Parameters:     450.91 M parameters
+  Compression Ratio:  173x
+
+  [Initializing Model]
+  [Executing Full Training Step]
+
+=======================================================
+  RESULTS
+=======================================================
+  Estimated Memory:   7906.8 MB  (7.72 GB)
+  Forward Pass:       0.08s
+  Backward Pass:      0.09s
+  Optimizer Step:     0.22s
+  QR Retraction:      3.02s
+  ******************************
+  Total Step Time:    3.41s
+
+  Orthonormality Err: 1.65e-06
+=======================================================

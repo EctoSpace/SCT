@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spectral-compact-training"
+version = "0.1.0"
+description = "Train 70B-class neural networks on consumer hardware. W = U diag(s) V^T with Stiefel QR retraction."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Björn Roman Kohlberger", email = "ectoSpaceAdmin@proton.me"},
+]
+keywords = ["machine-learning", "neural-networks", "svd", "spectral", "memory-efficient", "training"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0",
+]
+
+[project.optional-dependencies]
+examples = [
+    "transformers>=4.36",
+    "datasets>=2.14",
+    "psutil",
+]
+
+[project.urls]
+Homepage = "https://github.com/EctoSpace/SCT"
+Repository = "https://github.com/EctoSpace/SCT"
+Issues = "https://github.com/EctoSpace/SCT/issues"
+
+[tool.setuptools.packages.find]
+include = ["spectral_compact_training*"]

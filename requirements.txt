@@ -1,0 +1,7 @@
+# Core
+torch>=2.0
+
+# Required for examples
+transformers>=4.36
+datasets>=2.14
+psutil
