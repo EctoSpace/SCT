@@ -1,0 +1,29 @@
+{
+  "model": "LLaMA_3_70B_Class",
+  "hardware": "mps",
+  "config": {
+    "layers": 80,
+    "hidden_size": 8192,
+    "ffn_size": 28672,
+    "rank": 32
+  },
+  "parameters": {
+    "dense_equivalent": 77846282240,
+    "sct_actual": 450905600,
+    "compression_ratio": 172.64
+  },
+  "performance": {
+    "forward_sec": 0.077,
+    "backward_sec": 0.091,
+    "optimizer_sec": 0.221,
+    "retraction_sec": 3.02,
+    "total_step_sec": 3.41
+  },
+  "memory": {
+    "peak_allocated_mb": 7906.8,
+    "peak_allocated_gb": 7.72
+  },
+  "stability": {
+    "max_orthonormality_error": 1.6454960132250562e-06
+  }
+}

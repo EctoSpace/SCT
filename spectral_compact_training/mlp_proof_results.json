@@ -1,0 +1,22 @@
+{
+  "xor_classification": {
+    "dense": {
+      "accuracy": 1.0,
+      "time_sec": 0.267
+    },
+    "sct": {
+      "accuracy": 1.0,
+      "time_sec": 0.85
+    }
+  },
+  "sine_regression": {
+    "dense": {
+      "final_loss": 1e-06,
+      "time_sec": 0.432
+    },
+    "sct": {
+      "final_loss": 1.7e-05,
+      "time_sec": 0.772
+    }
+  }
+}

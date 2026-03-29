@@ -1,0 +1,52 @@
+(deck@steamdeck ~)$ python /home/deck/Desktop/SteamDeck/sct_steam_deck_v2.py
+
+##########################################################
+#   SPECTRAL COMPACT TRAINING — STEAM DECK CHALLENGE     #
+#   70B PARAMETER CLASS ARCHITECTURE ON 16GB RAM          #
+##########################################################
+
+[*] Device: CPU
+[*] Architecture: LLaMA-70B class
+    Hidden: 8192  FFN: 28672
+    Layers: 80  Rank: 32
+
+    SCT parameters:      452,216,320  (452.2M)
+    Dense equivalent: 77,846,282,240  (77.8B)
+    Compression:      172x
+    SCT + Adam mem:   7.24 GB
+    Dense + Adam mem: 1245.5 GB
+
+[*] Building 80-layer spectral stack...
+    Built in 5.6s
+    Actual parameters: 452,216,320
+
+[*] Forward pass (batch=1, seq=8, d=8192)...
+    Layer 20/80 done
+    Layer 40/80 done
+    Layer 60/80 done
+    Layer 80/80 done
+    Forward: 0.43s
+[*] Backward pass...
+    Backward: 0.92s
+[*] Optimizer step...
+[*] Stiefel QR retraction...
+    Retraction: 2.58s
+
+    Estimated memory (params+Adam): 7235.5 MB
+    Orthonormality error (layer 0 Q): 1.30e-06
+
+==========================================================
+  RESULT: SUCCESS
+==========================================================
+  Architecture:     70B-class (80 layers, d=8192)
+  SCT Parameters:   452,216,320 (452M)
+  Dense Equivalent: 77.8B
+  Compression:      172x
+  Forward:          0.43s
+  Backward:         0.92s
+  Optimizer:        2.35s
+  QR Retraction:    2.58s
+  Total Step:       6.28s
+  Ortho Error:      1.30e-06
+==========================================================
+(deck@steamdeck ~)$

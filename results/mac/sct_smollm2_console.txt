@@ -1,0 +1,129 @@
+python3 sct_smollm2.py --steps 400 --energy 0.95
+
+======================================================================
+  SCT Fine Tuning v2: SmolLM2 on Alpaca
+======================================================================
+  Model: HuggingFaceTB/SmolLM2-135M
+  Rank: adaptive energy>=0.95  LR: 0.0005  Device: mps
+  Steps: 400  Batch: 4
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Data: 500 samples, seq_len=128
+
+  1. DENSE FINE TUNING
+Loading weights: 100%|████████████████████████████████████████████████████| 272/272 [00:00<00:00, 9981.55it/s]
+  Params: 134,515,008
+  [Dense+AdamW                 ] step    1 | loss 2.1478 | ppl 8.6 | lr 2.50e-05 | 0.3s
+  [Dense+AdamW                 ] step   10 | loss 1.9438 | ppl 7.0 | lr 2.50e-04 | 2.0s
+  [Dense+AdamW                 ] step   20 | loss 1.8400 | ppl 6.3 | lr 5.00e-04 | 3.8s
+  [Dense+AdamW                 ] step   30 | loss 1.9302 | ppl 6.9 | lr 4.99e-04 | 5.7s
+  [Dense+AdamW                 ] step   40 | loss 2.0278 | ppl 7.6 | lr 4.97e-04 | 7.5s
+  [Dense+AdamW                 ] step   50 | loss 1.9570 | ppl 7.1 | lr 4.92e-04 | 9.4s
+  [Dense+AdamW                 ] step   60 | loss 1.9918 | ppl 7.3 | lr 4.86e-04 | 11.3s
+  [Dense+AdamW                 ] step   70 | loss 1.9731 | ppl 7.2 | lr 4.79e-04 | 13.1s
+  [Dense+AdamW                 ] step   80 | loss 1.9518 | ppl 7.0 | lr 4.70e-04 | 15.0s
+  [Dense+AdamW                 ] step   90 | loss 2.1664 | ppl 8.7 | lr 4.59e-04 | 16.8s
+  [Dense+AdamW                 ] step  100 | loss 2.0591 | ppl 7.8 | lr 4.47e-04 | 18.7s
+  [Dense+AdamW                 ] step  110 | loss 2.1911 | ppl 8.9 | lr 4.34e-04 | 20.6s
+  [Dense+AdamW                 ] step  120 | loss 2.1359 | ppl 8.5 | lr 4.19e-04 | 22.4s
+  [Dense+AdamW                 ] step  130 | loss 1.5693 | ppl 4.8 | lr 4.04e-04 | 24.3s
+  [Dense+AdamW                 ] step  140 | loss 1.0540 | ppl 2.9 | lr 3.87e-04 | 26.1s
+  [Dense+AdamW                 ] step  150 | loss 0.8594 | ppl 2.4 | lr 3.69e-04 | 28.0s
+  [Dense+AdamW                 ] step  160 | loss 0.9292 | ppl 2.5 | lr 3.50e-04 | 29.9s
+  [Dense+AdamW                 ] step  170 | loss 0.9053 | ppl 2.5 | lr 3.31e-04 | 31.8s
+  [Dense+AdamW                 ] step  180 | loss 0.9631 | ppl 2.6 | lr 3.11e-04 | 33.6s
+  [Dense+AdamW                 ] step  190 | loss 0.9336 | ppl 2.5 | lr 2.91e-04 | 35.5s
+  [Dense+AdamW                 ] step  200 | loss 0.8966 | ppl 2.5 | lr 2.71e-04 | 37.3s
+  [Dense+AdamW                 ] step  210 | loss 0.9358 | ppl 2.5 | lr 2.50e-04 | 39.2s
+  [Dense+AdamW                 ] step  220 | loss 0.8683 | ppl 2.4 | lr 2.29e-04 | 41.1s
+  [Dense+AdamW                 ] step  230 | loss 0.8736 | ppl 2.4 | lr 2.09e-04 | 43.0s
+  [Dense+AdamW                 ] step  240 | loss 0.8604 | ppl 2.4 | lr 1.89e-04 | 44.9s
+  [Dense+AdamW                 ] step  250 | loss 0.9039 | ppl 2.5 | lr 1.69e-04 | 46.7s
+  [Dense+AdamW                 ] step  260 | loss 0.4387 | ppl 1.6 | lr 1.50e-04 | 48.6s
+  [Dense+AdamW                 ] step  270 | loss 0.4376 | ppl 1.5 | lr 1.31e-04 | 50.4s
+  [Dense+AdamW                 ] step  280 | loss 0.4160 | ppl 1.5 | lr 1.13e-04 | 52.3s
+  [Dense+AdamW                 ] step  290 | loss 0.3731 | ppl 1.5 | lr 9.64e-05 | 54.2s
+  [Dense+AdamW                 ] step  300 | loss 0.4157 | ppl 1.5 | lr 8.07e-05 | 56.0s
+  [Dense+AdamW                 ] step  310 | loss 0.3982 | ppl 1.5 | lr 6.61e-05 | 57.9s
+  [Dense+AdamW                 ] step  320 | loss 0.4045 | ppl 1.5 | lr 5.27e-05 | 59.7s
+  [Dense+AdamW                 ] step  330 | loss 0.3313 | ppl 1.4 | lr 4.07e-05 | 61.6s
+  [Dense+AdamW                 ] step  340 | loss 0.3632 | ppl 1.4 | lr 3.01e-05 | 63.5s
+  [Dense+AdamW                 ] step  350 | loss 0.4525 | ppl 1.6 | lr 2.11e-05 | 65.3s
+  [Dense+AdamW                 ] step  360 | loss 0.3787 | ppl 1.5 | lr 1.35e-05 | 67.2s
+  [Dense+AdamW                 ] step  370 | loss 0.4234 | ppl 1.5 | lr 7.65e-06 | 69.0s
+  [Dense+AdamW                 ] step  380 | loss 0.3087 | ppl 1.4 | lr 3.41e-06 | 70.9s
+  [Dense+AdamW                 ] step  390 | loss 0.2325 | ppl 1.3 | lr 8.54e-07 | 72.8s
+  [Dense+AdamW                 ] step  400 | loss 0.2684 | ppl 1.3 | lr 0.00e+00 | 74.6s
+
+  2. SCT FINE TUNING adaptive energy>=0.95
+Loading weights: 100%|███████████████████████████████████████████████████| 272/272 [00:00<00:00, 10417.49it/s]
+  Replaced 90 layers
+  Avg energy retained: 0.950
+  MLP compression: 0.9x
+  Trainable: 84,333,271 / 139,186,903
+  [SCT                         ] step    1 | loss 8.9544 | ppl 7742.1 | lr 2.50e-05 | 2.1s
+  [SCT                         ] step   10 | loss 5.8583 | ppl 350.1 | lr 2.50e-04 | 13.4s
+  [SCT                         ] step   20 | loss 3.1674 | ppl 23.7 | lr 5.00e-04 | 25.7s
+  [SCT                         ] step   30 | loss 3.7072 | ppl 40.7 | lr 4.99e-04 | 38.2s
+  [SCT                         ] step   40 | loss 3.6405 | ppl 38.1 | lr 4.97e-04 | 50.7s
+  [SCT                         ] step   50 | loss 3.7210 | ppl 41.3 | lr 4.92e-04 | 63.2s
+  [SCT                         ] step   60 | loss 3.9690 | ppl 52.9 | lr 4.86e-04 | 75.8s
+  [SCT                         ] step   70 | loss 3.8682 | ppl 47.9 | lr 4.79e-04 | 88.4s
+  [SCT                         ] step   80 | loss 3.8915 | ppl 49.0 | lr 4.70e-04 | 100.9s
+  [SCT                         ] step   90 | loss 3.8168 | ppl 45.5 | lr 4.59e-04 | 113.5s
+  [SCT                         ] step  100 | loss 3.6713 | ppl 39.3 | lr 4.47e-04 | 126.0s
+  [SCT                         ] step  110 | loss 3.9796 | ppl 53.5 | lr 4.34e-04 | 138.6s
+  [SCT                         ] step  120 | loss 3.5285 | ppl 34.1 | lr 4.19e-04 | 151.1s
+  [SCT                         ] step  130 | loss 3.4955 | ppl 33.0 | lr 4.04e-04 | 163.7s
+  [SCT                         ] step  140 | loss 2.7608 | ppl 15.8 | lr 3.87e-04 | 176.2s
+  [SCT                         ] step  150 | loss 2.4313 | ppl 11.4 | lr 3.69e-04 | 188.7s
+  [SCT                         ] step  160 | loss 2.9525 | ppl 19.2 | lr 3.50e-04 | 201.3s
+  [SCT                         ] step  170 | loss 2.7014 | ppl 14.9 | lr 3.31e-04 | 213.8s
+  [SCT                         ] step  180 | loss 2.9986 | ppl 20.1 | lr 3.11e-04 | 226.4s
+  [SCT                         ] step  190 | loss 2.9401 | ppl 18.9 | lr 2.91e-04 | 238.9s
+  [SCT                         ] step  200 | loss 2.7294 | ppl 15.3 | lr 2.71e-04 | 251.5s
+  [SCT                         ] step  210 | loss 2.6470 | ppl 14.1 | lr 2.50e-04 | 264.1s
+  [SCT                         ] step  220 | loss 2.6132 | ppl 13.6 | lr 2.29e-04 | 276.6s
+  [SCT                         ] step  230 | loss 2.5646 | ppl 13.0 | lr 2.09e-04 | 289.1s
+  [SCT                         ] step  240 | loss 2.5376 | ppl 12.6 | lr 1.89e-04 | 301.7s
+  [SCT                         ] step  250 | loss 2.3719 | ppl 10.7 | lr 1.69e-04 | 314.3s
+  [SCT                         ] step  260 | loss 1.5516 | ppl 4.7 | lr 1.50e-04 | 326.8s
+  [SCT                         ] step  270 | loss 1.3729 | ppl 3.9 | lr 1.31e-04 | 339.3s
+  [SCT                         ] step  280 | loss 1.2715 | ppl 3.6 | lr 1.13e-04 | 351.9s
+  [SCT                         ] step  290 | loss 1.2905 | ppl 3.6 | lr 9.64e-05 | 364.5s
+  [SCT                         ] step  300 | loss 1.1781 | ppl 3.2 | lr 8.07e-05 | 377.1s
+  [SCT                         ] step  310 | loss 1.1733 | ppl 3.2 | lr 6.61e-05 | 389.7s
+  [SCT                         ] step  320 | loss 1.1163 | ppl 3.1 | lr 5.27e-05 | 402.6s
+  [SCT                         ] step  330 | loss 1.0206 | ppl 2.8 | lr 4.07e-05 | 415.3s
+  [SCT                         ] step  340 | loss 1.3758 | ppl 4.0 | lr 3.01e-05 | 427.8s
+  [SCT                         ] step  350 | loss 1.1990 | ppl 3.3 | lr 2.11e-05 | 440.4s
+  [SCT                         ] step  360 | loss 1.1638 | ppl 3.2 | lr 1.35e-05 | 453.0s
+  [SCT                         ] step  370 | loss 1.0708 | ppl 2.9 | lr 7.65e-06 | 465.6s
+  [SCT                         ] step  380 | loss 0.8260 | ppl 2.3 | lr 3.41e-06 | 478.3s
+  [SCT                         ] step  390 | loss 0.5628 | ppl 1.8 | lr 8.54e-07 | 490.9s
+  [SCT                         ] step  400 | loss 0.5094 | ppl 1.7 | lr 0.00e+00 | 503.6s
+
+======================================================================
+  RESULTS
+======================================================================
+  Dense+AdamW                         | loss 0.2505 | ppl     1.3 | params  134,515,008 | 74.6s
+  SCT                                 | loss 0.5361 | ppl     1.7 | params   84,333,271 | 503.6s
+
+  Trainable param reduction: 1.6x
+  PPL ratio: 1.31x
+  MLP compression: 0.9x
+
+======================================================================
+  GENERATION
+======================================================================
+
+  [Dense]: ### Instruction:
+Explain what gravity is in simple terms.
+
+### Response:
+Gravity is the result of the curvature of spacetime, which means that gravity can be bent or stretched by changes to the laws of physics. This bending and stretching effect is responsible for causing objects to move in straight
+
+  [SCT]:   ### Instruction:
+Explain what gravity is in simple terms.
+
+### Response:
+gravity is a form of gravity that occurs where the particles are placed in an array of equal positions, with their mass at 3 and then they distance matter from other objects or concepts to better inform decisions. 
