@@ -1,0 +1,61 @@
+{
+  "model": "SmolLM2-1.7B",
+  "dataset": "alpaca",
+  "hardware": "NVIDIA A100-SXM4-40GB",
+  "steps": 2000,
+  "dense_lr": 2e-05,
+  "sct_lr": 0.0005,
+  "batch_size": 4,
+  "dense": {
+    "params": 1711376384,
+    "final_loss_smoothed": 1.2912,
+    "final_ppl_smoothed": 3.64,
+    "time_min": 39.1
+  },
+  "sct_ranks": [
+    {
+      "rank": 256,
+      "params": 692178944,
+      "compression": 5.9,
+      "final_loss_smoothed": 4.3254,
+      "final_ppl_smoothed": 75.6,
+      "gpu_gb": 21.3,
+      "time_min": 34.9,
+      "step_time": 1.047,
+      "ppl_ratio_vs_dense": 20.79
+    },
+    {
+      "rank": 128,
+      "params": 597797888,
+      "compression": 11.7,
+      "final_loss_smoothed": 4.183,
+      "final_ppl_smoothed": 65.56,
+      "gpu_gb": 20.0,
+      "time_min": 24.7,
+      "step_time": 0.74,
+      "ppl_ratio_vs_dense": 18.03
+    },
+    {
+      "rank": 64,
+      "params": 550607360,
+      "compression": 23.5,
+      "final_loss_smoothed": 4.3392,
+      "final_ppl_smoothed": 76.65,
+      "gpu_gb": 19.3,
+      "time_min": 20.5,
+      "step_time": 0.616,
+      "ppl_ratio_vs_dense": 21.07
+    },
+    {
+      "rank": 32,
+      "params": 527012096,
+      "compression": 46.9,
+      "final_loss_smoothed": 4.4651,
+      "final_ppl_smoothed": 86.93,
+      "gpu_gb": 19.0,
+      "time_min": 18.7,
+      "step_time": 0.562,
+      "ppl_ratio_vs_dense": 23.9
+    }
+  ]
+}
