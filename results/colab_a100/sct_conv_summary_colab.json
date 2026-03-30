@@ -1,0 +1,18 @@
+{
+  "model": "SmolLM2-1.7B",
+  "dataset": "alpaca",
+  "hardware": "NVIDIA A100-SXM4-40GB",
+  "steps": 2000,
+  "lr": 2e-05,
+  "batch_size": 4,
+  "rank": 32,
+  "energy": 0.95,
+  "dense_final_loss": 0.9818885922431946,
+  "dense_final_ppl": 2.6694930680785496,
+  "sct_final_loss": 4.621915340423584,
+  "sct_final_ppl": 101.68861403784743,
+  "ppl_ratio": 38.09285562634593,
+  "dense_time_min": 39.145787123839064,
+  "sct_time_min": 6.29764149983724,
+  "peak_gpu_gb": 15.356891648
+}
