@@ -1,0 +1,30 @@
+=================================================================
+  SCT Per-Component LR Experiment
+  Dense params (attn+norm): LR = 2e-05
+  SCT params (U, s, V):     LR = 0.0005
+  Steps: 2000  Batch: 2  Seq: 256  Rank: 32
+=================================================================
+
+  Step     1/2000  Loss: 13.9203  Avg: 13.9203  PPL: 1110498.5  Step: 2.11s  GPU: 4.7GB  ETA: 70.3min
+  Step   100/2000  Loss: 7.2421  Avg: 7.0014  PPL: 1397.0  Step: 1.24s  GPU: 5.6GB  ETA: 39.2min
+  Step   200/2000  Loss: 6.7392  Avg: 6.1669  PPL: 844.9  Step: 1.25s  GPU: 5.6GB  ETA: 37.5min
+  Step   300/2000  Loss: 5.9853  Avg: 5.7381  PPL: 397.6  Step: 1.25s  GPU: 5.6GB  ETA: 35.4min
+  Step   400/2000  Loss: 5.8734  Avg: 5.7106  PPL: 355.4  Step: 1.25s  GPU: 5.6GB  ETA: 33.2min
+  Step   500/2000  Loss: 5.4889  Avg: 5.5545  PPL: 242.0  Step: 1.25s  GPU: 5.6GB  ETA: 31.1min
+  Step   600/2000  Loss: 5.5583  Avg: 5.3777  PPL: 259.4  Step: 1.24s  GPU: 5.6GB  ETA: 29.0min
+  Step   700/2000  Loss: 5.2177  Avg: 5.4687  PPL: 184.5  Step: 1.24s  GPU: 5.6GB  ETA: 26.9min
+  Step   800/2000  Loss: 4.6770  Avg: 5.1400  PPL: 107.4  Step: 1.26s  GPU: 5.6GB  ETA: 25.1min
+  Step   900/2000  Loss: 5.1808  Avg: 5.2190  PPL: 177.8  Step: 1.24s  GPU: 5.6GB  ETA: 22.8min
+  Step  1000/2000  Loss: 4.0342  Avg: 5.0532  PPL: 56.5  Step: 1.23s  GPU: 5.6GB  ETA: 20.5min
+  Step  1100/2000  Loss: 4.8531  Avg: 5.1344  PPL: 128.1  Step: 1.23s  GPU: 5.6GB  ETA: 18.5min
+  Step  1200/2000  Loss: 5.0215  Avg: 4.9057  PPL: 151.6  Step: 1.23s  GPU: 5.6GB  ETA: 16.4min
+  Step  1300/2000  Loss: 4.2745  Avg: 4.8923  PPL: 71.8  Step: 1.23s  GPU: 5.6GB  ETA: 14.3min
+  Step  1400/2000  Loss: 3.5438  Avg: 4.8408  PPL: 34.6  Step: 1.24s  GPU: 5.6GB  ETA: 12.4min
+  Step  1500/2000  Loss: 4.9565  Avg: 4.8240  PPL: 142.1  Step: 1.24s  GPU: 5.6GB  ETA: 10.3min
+  Step  1600/2000  Loss: 5.3643  Avg: 4.8954  PPL: 213.6  Step: 1.24s  GPU: 5.6GB  ETA: 8.2min
+  Step  1700/2000  Loss: 3.6573  Avg: 4.8102  PPL: 38.8  Step: 1.23s  GPU: 5.6GB  ETA: 6.2min
+  Step  1800/2000  Loss: 4.8810  Avg: 4.7996  PPL: 131.8  Step: 1.24s  GPU: 5.6GB  ETA: 4.1min
+  Step  1900/2000  Loss: 4.9874  Avg: 4.7399  PPL: 146.5  Step: 1.24s  GPU: 5.6GB  ETA: 2.1min
+  Step  2000/2000  Loss: 4.5012  Avg: 4.7450  PPL: 90.1  Step: 1.23s  GPU: 5.6GB  ETA: 0.0min
+
+Training complete in 41.3 minutes.
