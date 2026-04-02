@@ -66,7 +66,21 @@ Rank sweep on SmolLM2-1.7B: dense baseline vs SCT at ranks 32, 64, 128, 256. MLP
 
 **The ~3 loss gap vs dense points to the shared LR, not MLP capacity.** At rank 32, MLP spectral parameters account for only 18M of 527M total; attention layers are 403M (77% of the model). All components train at 5e-4, which is 25x the dense baseline LR. A per-component LR schedule (dense LR for attention/embeddings, higher LR for SCT factors) is the clear next step.
 
-Colab notebook: [`proof/SCT_RankSweep_1_7B.ipynb`](proof/SCT_RankSweep_1_7B.ipynb) | Reports: [`docs/SCT_RankSweep_Report.pdf`](docs/SCT_RankSweep_Report.pdf)
+Colab notebook: [`examples/sct_RankSweep_1_7B.ipynb`](examples/sct_RankSweep_1_7B.ipynb) | Reports: [`docs/SCT_RankSweep_Report.pdf`](docs/SCT_RankSweep_Report.pdf)
+
+### Per-Component Learning Rate Scheduling (SmolLM2-1.7B on Alpaca)
+
+To address the learning rate mismatch identified in the rank sweep, we implemented per-component LR scheduling: attention layers, embeddings, and layer norms train at the dense baseline LR (2e-5), while SCT spectral factors (U, s, V) train at 5e-4. MLP layers converted to SpectralLinear at rank 32. Same setup: 2000 steps, batch 2, seq 256, A100 40GB.
+
+| Method | Params | MLP Compression | Final Loss | Final PPL | GPU Memory | Step Time |
+|--------|--------|-----------------|------------|-----------|------------|-----------|
+| Dense | 1,711M | 1.0x | 1.29 | 3.6 | 35.5 GB | 1.17s |
+| SCT shared LR (r=32) | 527M | 46.9x | 4.47 | 86.9 | 19.0 GB | 0.56s |
+| SCT per-component LR (r=32) | 527M | 46.9x | 4.75 | 90.1 | 19.0 GB | 0.56s |
+
+Per-component LR closes the gap slightly (4.47 → 4.75) but the loss floor remains ~3.5 higher than dense. This suggests the gap is not purely an LR artifact. Potential causes: (1) rank 32 may be too aggressive for MLP layers at 1.7B scale, (2) attention layers (77% of parameters) may require different tuning when paired with compressed MLPs, (3) the spectral parameterization may introduce subtle gradient flow differences.
+
+Notebook: [`examples/sct_per_component_lr.ipynb`](examples/sct_per_component_lr.ipynb) | Report: [`docs/SCT_PerComponentLR_Report.pdf`](docs/SCT_PerComponentLR_Report.pdf)
 
 ### Compression Scales with Model Size
 
@@ -153,7 +167,7 @@ SCT builds on ideas from several lines of research. The individual components (S
 
 **Rank constrains expressivity.** A rank-k factorization can only represent a rank-k weight matrix. If the task requires higher effective rank, the model will underperform a dense equivalent. However, the 1.7B rank sweep shows that all ranks (32–256) converge to the same loss floor, suggesting that at practical training durations, MLP rank may not be the primary bottleneck.
 
-**Convergence gap vs dense.** The 1.7B rank sweep shows a ~3 loss gap between SCT and dense after 2000 steps. The rank sweep evidence suggests this gap is driven by the shared learning rate across all model components (attention layers are 77% of the SCT model's parameters and are trained at 25x the dense baseline LR), not by MLP rank capacity. Per-component LR scheduling is the clear next step.
+**Convergence gap vs dense.** The 1.7B rank sweep shows a ~3 loss gap between SCT and dense after 2000 steps. Per-component LR scheduling (dense LR for attention/embeddings, higher LR for SCT factors) closes the gap slightly but the loss floor remains ~3.5 higher than dense. This suggests the gap is not purely an LR artifact; rank 32 may be too aggressive for MLP layers at 1.7B scale, or the spectral parameterization may introduce subtle gradient flow differences.
 
 **QR retraction cost.** At O(mk²) per layer per step, retraction is cheap for small k but becomes a meaningful fraction of step time. The 70B benchmark shows retraction taking ~40-50% of total step time. At 1.7B scale on A100, retraction overhead is negligible (0.56s total step at rank 32).
 
@@ -241,9 +255,10 @@ examples/
   sct_smollm2.py                      SmolLM2 fine-tuning on Alpaca
   sct_steamdeck.py                    70B architecture validation (any hardware)
   sct_vs_dense.py                     Head-to-head Dense vs SCT comparison
-  sct_convergence_1.7B.pz             Dense vs SCT rank 32 (SmolLM2-1.7B)
+  sct_convergence_1.7B.py             Dense vs SCT rank 32 (SmolLM2-1.7B)
   sct_convergence_1_7B.ipynb          Colab: Dense vs SCT rank 32 (SmolLM2-1.7B)
   sct_RankSweep_1_7B.ipynb            Colab: Rank sweep 32/64/128/256
+  sct_per_component_lr.ipynb          Colab: Per-component LR scheduling
 
 results/
   mac/
@@ -260,16 +275,20 @@ results/
   a100/
     sct_conv_dense_losses.json        Convergence Dense baseline (1.7B, 2000 steps)
     sct_conv_summary_colab.json       Convergence summary metrics
+    sct_per_component_lr.png          Per-component LR loss plot
+    sct_per_component_lr.txt          Per-component LR console output
+    sct_per_component_lr_losses.json  Per-component LR loss history
     sct_rank_sweep_dense_losses.json  Rank Sweep Dense baseline (1.7B, 2000 steps)
     sct_rank_sweep_r32_losses.json    SCT rank 32 loss history
     sct_rank_sweep_64_losses.json     SCT rank 64 loss history
     sct_rank_sweep_r128_losses.json   SCT rank 128 loss history
     sct_rank_sweep_r256_losses.json   SCT rank 256 loss history
-    sct_rank_sweep_summary.json           Rank sweep summary metrics
+    sct_rank_sweep_summary.json       Rank sweep summary metrics
 
 docs/
   SCT_Patent_Application.pdf          Patent specification
   SCT_Convergence_Report.pdf          Convergence experiment report
+  SCT_PerComponentLR_Report.pdf       Per-component LR experiment report
   SCT_RankSweep_Report.pdf            Rank sweep report
   patent_pending.webp                 Filing confirmation
 ```
@@ -284,7 +303,7 @@ docs/
 
 **vs LoRA:** LoRA keeps the full dense model in memory and trains small adapter matrices alongside it. SCT replaces the dense matrices entirely. The spectral factors *are* the weights. LoRA is a fine-tuning add-on; SCT is a different representation of the model itself.
 
-**Current status (March 2026):** Memory efficiency and training throughput improvements are empirically validated at 1.7B scale on A100. Closing the convergence gap via per-component learning rates is the active research direction.
+**Current status (March 2026):** Memory efficiency and training throughput improvements are empirically validated at 1.7B scale on A100. Per-component learning rates help close the convergence gap slightly, but further investigation into rank selection and gradient flow is needed.
 
 ---
 
