@@ -7,9 +7,15 @@ SCT stores every weight matrix as `W = U diag(s) V^T` and never materializes the
 That is the entire method.
 
 ```
-Dense 70B + Adam:     1,245 GB
-SCT 70B (rank 32):      7.2 GB
-Compression:             172x
+Per-MLP-layer (LLaMA-70B dimensions, FP32 Adam):
+  Dense + Adam (k=32):    3,758 MB
+  SCT + Adam (k=32):         19 MB
+  Per-MLP-layer reduction: 199.1x   (mathematically exact)
+
+Measured 70B-class training step peak memory:
+  Apple M4 Pro (48 GB):    7.94 GB
+  Steam Deck   (16 GB):    7.24 GB
+  Dense FP32 (full 70B):   ~1,245 GB
 ```
 
 > **Patent Pending** — Irish Short-Term Patent Application PTIE20260000000219, filed March 27, 2026.
