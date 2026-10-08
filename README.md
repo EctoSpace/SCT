@@ -18,7 +18,7 @@ Measured 70B-class training step peak memory:
   Dense FP32 (full 70B):   ~1,245 GB
 ```
 
-> **Patent Pending** — Irish Short-Term Patent Application PTIE20260000000219, filed March 27, 2026.
+> **Patent Pending**: Irish Short-Term Patent Application PTIE20260000000219, filed March 27, 2026.
 
 ---
 
@@ -52,7 +52,7 @@ Head-to-head recovery test: pre-trained SmolLM2-135M weights converted to spectr
 
 SCT recovers from an initial loss spike (9.4 → 0.65) to 1.46x baseline perplexity, confirming gradient integrity through spectral factors with Stiefel retraction.
 
-**Important context:** SmolLM2-135M (hidden dim 576) is *below* the optimal scale for SCT compression. The adaptive rank at 95% energy produces ranks of 412–466, close to the full dimension. This test validates that the math works, not that compression is useful at this scale. Compression becomes significant at 1.7B+ parameters (see rank sweep below).
+**Important context:** SmolLM2-135M (hidden dim 576) is *below* the optimal scale for SCT compression. The adaptive rank at 95% energy produces ranks of 412 to 466, close to the full dimension. This test validates that the math works, not that compression is useful at this scale. Compression becomes significant at 1.7B+ parameters (see rank sweep below).
 
 ### Fine-Tuning Rank Sweep (SmolLM2-1.7B on Alpaca)
 
@@ -68,7 +68,7 @@ Rank sweep on SmolLM2-1.7B: dense baseline vs SCT at ranks 32, 64, 128, 256. MLP
 
 **Memory efficiency confirmed at scale.** GPU usage drops from 35.5 GB (dense) to 19.0 GB (rank 32), a 46% reduction. Training steps run 2.1x faster. Even rank 256 saves 40% of VRAM.
 
-**All ranks converge to the same loss floor (~4.2–4.5).** Rank 256 (5.9x compression) and rank 32 (46.9x) end within 0.3 loss of each other. This means MLP rank is not the bottleneck at 2000 steps. Rank 128 achieves the best PPL (65.6), likely because 5e-4 is near-optimal for its compression level while being too aggressive for rank 256 (which preserves more pretrained structure and needs a gentler LR).
+**All ranks converge to the same loss floor (~4.2 to 4.5).** Rank 256 (5.9x compression) and rank 32 (46.9x) end within 0.3 loss of each other. This means MLP rank is not the bottleneck at 2000 steps. Rank 128 achieves the best PPL (65.6), likely because 5e-4 is near-optimal for its compression level while being too aggressive for rank 256 (which preserves more pretrained structure and needs a gentler LR).
 
 **The ~3 loss gap vs dense points to the shared LR, not MLP capacity.** At rank 32, MLP spectral parameters account for only 18M of 527M total; attention layers are 403M (77% of the model). All components train at 5e-4, which is 25x the dense baseline LR. A per-component LR schedule (dense LR for attention/embeddings, higher LR for SCT factors) is the clear next step.
 
@@ -171,13 +171,13 @@ SCT builds on ideas from several lines of research. The individual components (S
 
 ## Limitations
 
-**Rank constrains expressivity.** A rank-k factorization can only represent a rank-k weight matrix. If the task requires higher effective rank, the model will underperform a dense equivalent. However, the 1.7B rank sweep shows that all ranks (32–256) converge to the same loss floor, suggesting that at practical training durations, MLP rank may not be the primary bottleneck.
+**Rank constrains expressivity.** A rank-k factorization can only represent a rank-k weight matrix. If the task requires higher effective rank, the model will underperform a dense equivalent. However, the 1.7B rank sweep shows that all ranks (32 to 256) converge to the same loss floor, suggesting that at practical training durations, MLP rank may not be the primary bottleneck.
 
 **Convergence gap vs dense.** The 1.7B rank sweep shows a ~3 loss gap between SCT and dense after 2000 steps. Per-component LR scheduling (dense LR for attention/embeddings, higher LR for SCT factors) closes the gap slightly but the loss floor remains ~3.5 higher than dense. This suggests the gap is not purely an LR artifact; rank 32 may be too aggressive for MLP layers at 1.7B scale, or the spectral parameterization may introduce subtle gradient flow differences.
 
 **QR retraction cost.** At O(mk²) per layer per step, retraction is cheap for small k but becomes a meaningful fraction of step time. The 70B benchmark shows retraction taking ~40-50% of total step time. At 1.7B scale on A100, retraction overhead is negligible (0.56s total step at rank 32).
 
-**Strongest for pre-training.** When converting pre-trained dense weights to spectral form, the network has already learned to use its full spectral budget. Energy-based rank selection (retaining 95%+ of singular value energy) partially mitigates this, but the rank constraint inevitably loses information. The 1.7B experiments use hard rank caps (32–256) rather than energy thresholds.
+**Strongest for pre-training.** When converting pre-trained dense weights to spectral form, the network has already learned to use its full spectral budget. Energy-based rank selection (retaining 95%+ of singular value energy) partially mitigates this, but the rank constraint inevitably loses information. The 1.7B experiments use hard rank caps (32 to 256) rather than energy thresholds.
 
 **Small models benefit less.** Models below ~1.7B parameters (hidden dim < 2048) produce ranks close to the full dimension at practical energy thresholds, offering little compression. SCT compression scales with the ratio of layer dimension to rank.
 
@@ -329,8 +329,8 @@ docs/
 
 ## License
 
-Apache 2.0 — See [LICENSE](LICENSE) for details.
+Apache 2.0. See [LICENSE](LICENSE) for details.
 
 ## Author
 
-**Björn Roman Kohlberger** — [EctoSpace](https://github.com/EctoSpace)
+**Björn Roman Kohlberger**, [EctoSpace](https://github.com/EctoSpace)
